@@ -18,7 +18,13 @@ abstract class IndexConfigurator
             return $this->name;
         }
 
-        return Str::snake(str_replace('IndexConfigurator', '', class_basename($this)));
+        $prefix = config('scout.prefix');
+
+        if(!empty($prefix)) {
+            $prefix .= '_';
+        }
+
+        return $prefix. Str::snake(str_replace('IndexConfigurator', '', class_basename($this)));
     }
 
     public function getSettings()
